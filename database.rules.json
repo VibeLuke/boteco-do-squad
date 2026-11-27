@@ -1,0 +1,707 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "cruzadabotecos": {
+      "v1": {
+        "scores": {
+          ".read": true,
+          "$player": {
+            "$code": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || newData.child('s').val() >= data.child('s').val())",
+              ".validate": "$code.matches(/^[A-Za-z0-9_-]{3,64}$/) && newData.hasChildren(['s', 't']) && newData.child('s').isNumber() && newData.child('s').val() >= 0 && newData.child('s').val() <= 20000 && newData.child('t').isNumber() && newData.child('t').val() <= now",
+              "s": {
+                ".validate": true
+              },
+              "t": {
+                ".validate": true
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        }
+      },
+      "bar": {
+        ".read": true,
+        "presence": {
+          "$player": {
+            ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 200)",
+            ".validate": "newData.hasChildren(['r', 'x', 'y', 'tx', 'ty', 'at', 'on'])",
+            "r": {
+              ".validate": "newData.isString() && newData.val().matches(/^[a-z]{1,16}$/)"
+            },
+            "x": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+            },
+            "y": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+            },
+            "tx": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+            },
+            "ty": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+            },
+            "at": {
+              ".validate": "newData.val() === now"
+            },
+            "on": {
+              ".validate": "newData.isBoolean()"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "rate": {
+          "$player": {
+            ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 2000)",
+            ".validate": "newData.hasChildren(['at'])",
+            "at": {
+              ".validate": "newData.val() === now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "chat": {
+          "$player": {
+            "$slot": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && newData.parent().parent().parent().child('rate').child($player).child('at').val() === now",
+              ".validate": "$slot.matches(/^1?[0-9]$/) && newData.hasChildren(['m', 't'])",
+              "m": {
+                ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 140"
+              },
+              "t": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "fx": {
+          "$player": {
+            "$slot": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && newData.parent().parent().parent().child('rate').child($player).child('at').val() === now",
+              ".validate": "$slot.matches(/^[0-9]$/) && newData.hasChildren(['k', 'to', 'e', 't'])",
+              "k": {
+                ".validate": "newData.isString() && newData.val().matches(/^(emoji|tapa|amendoim|cerveja|bigode|bola|brinde|reviver)$/)"
+              },
+              "to": {
+                ".validate": "newData.isString() && newData.val().matches(/^(vini|will|dani|bia|tati)?$/)"
+              },
+              "e": {
+                ".validate": "newData.isString() && newData.val().length <= 8"
+              },
+              "t": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "marks": {
+          "$player": {
+            ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && newData.parent().parent().child('rate').child(newData.child('by').val()).child('at').val() === now",
+            ".validate": "newData.hasChildren(['by', 'n', 't'])",
+            "by": {
+              ".validate": "newData.isString() && newData.val().matches(/^(vini|will|dani|bia|tati)$/)"
+            },
+            "n": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 6"
+            },
+            "t": {
+              ".validate": "newData.val() === now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "cd": {
+          "$player": {
+            "geral": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 10000)",
+              ".validate": "newData.hasChildren(['at'])",
+              "at": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            },
+            "soco": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 20000)",
+              ".validate": "newData.hasChildren(['at'])",
+              "at": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            },
+            "garrafa": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 60000)",
+              ".validate": "newData.hasChildren(['at'])",
+              "at": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            },
+            "taco": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 75000)",
+              ".validate": "newData.hasChildren(['at'])",
+              "at": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            },
+            "dardo": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 45000)",
+              ".validate": "newData.hasChildren(['at'])",
+              "at": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            },
+            "banqueta": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 120000)",
+              ".validate": "newData.hasChildren(['at'])",
+              "at": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            },
+            "frigideira": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 90000)",
+              ".validate": "newData.hasChildren(['at'])",
+              "at": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "hit": {
+          "$player": {
+            "$slot": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && newData.parent().parent().parent().child('cd').child($player).child('geral').child('at').val() === now && newData.parent().parent().parent().child('cd').child($player).child(newData.child('w').val()).child('at').val() === now && newData.child('to').val() !== $player && root.child('cruzadabotecos').child('bar').child('presence').child(newData.child('to').val()).child('on').val() === true && root.child('cruzadabotecos').child('bar').child('presence').child(newData.child('to').val()).child('r').val() !== 'mesa' && root.child('cruzadabotecos').child('bar').child('presence').child(newData.child('to').val()).child('r').val() === newData.child('r').val() && now - root.child('cruzadabotecos').child('bar').child('presence').child(newData.child('to').val()).child('at').val() < 90000",
+              ".validate": "$slot.matches(/^([0-9]|[12][0-9])$/) && newData.hasChildren(['w', 'to', 'r', 'x', 'y', 't'])",
+              "w": {
+                ".validate": "newData.isString() && newData.val().matches(/^(soco|garrafa|taco|dardo|banqueta|frigideira)$/)"
+              },
+              "to": {
+                ".validate": "newData.isString() && newData.val().matches(/^(vini|will|dani|bia|tati)$/)"
+              },
+              "r": {
+                ".validate": "newData.isString() && newData.val().matches(/^[a-z]{1,16}$/)"
+              },
+              "x": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+              },
+              "y": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+              },
+              "t": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "kills": {
+          "$killer": {
+            "$victim": {
+              ".write": "$killer.matches(/^(vini|will|dani|bia|tati)$/) && $victim.matches(/^(vini|will|dani|bia|tati)$/) && $killer !== $victim && newData.exists() && ((data.exists() && data.child('t').val() >= (now - ((now - 32400000) % 86400000)) && newData.child('n').val() === data.child('n').val() + 1 && now - data.child('t').val() >= 13000) || ((!data.exists() || data.child('t').val() < (now - ((now - 32400000) % 86400000))) && newData.child('n').val() === 1)) && now - root.child('cruzadabotecos').child('bar').child('cd').child($killer).child('geral').child('at').val() < 15000",
+              ".validate": "newData.hasChildren(['n', 't'])",
+              "n": {
+                ".validate": "newData.isNumber()"
+              },
+              "t": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "dia": {
+          "$player": {
+            ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && ((data.exists() && data.child('t').val() >= (now - ((now - 32400000) % 86400000)) && data.child('ok').val() === false && data.child('n').val() < 6 && newData.child('n').val() === data.child('n').val() + 1 && newData.child('g').val().beginsWith(data.child('g').val() + '|')) || ((!data.exists() || data.child('t').val() < (now - ((now - 32400000) % 86400000))) && newData.child('n').val() === 1))",
+            ".validate": "newData.hasChildren(['g', 'n', 'ok', 't'])",
+            "g": {
+              ".validate": "newData.isString() && newData.val().matches(/^[VAX]{5,7}(\\|[VAX]{5,7}){0,5}$/)"
+            },
+            "n": {
+              ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 6"
+            },
+            "ok": {
+              ".validate": "newData.isBoolean() && (newData.val() === false || newData.parent().child('g').val().matches(/^V{5,7}$/) || newData.parent().child('g').val().matches(/\\|V{5,7}$/))"
+            },
+            "t": {
+              ".validate": "newData.val() === now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "sino": {
+          ".write": "newData.exists() && (!data.exists() || data.child('t').val() < (now - ((now - 32400000) % 86400000))) && newData.parent().child('dia').child(newData.child('p').val()).child('ok').val() === true && newData.parent().child('dia').child(newData.child('p').val()).child('t').val() === now",
+          ".validate": "newData.hasChildren(['p', 't'])",
+          "p": {
+            ".validate": "newData.isString() && newData.val().matches(/^(vini|will|dani|bia|tati)$/)"
+          },
+          "t": {
+            ".validate": "newData.val() === now"
+          },
+          "$other": {
+            ".validate": false
+          }
+        },
+        "mess": {
+          "$room": {
+            "$prop": {
+              ".write": "$room.matches(/^[a-z]{1,16}$/) && $prop.matches(/^[0-9]{1,2}-[0-9]{1,2}$/) && newData.exists() && newData.parent().parent().parent().child('rate').child(newData.child('by').val()).child('at').val() === now",
+              ".validate": "newData.hasChildren(['d', 'by', 't'])",
+              "d": {
+                ".validate": "newData.isBoolean()"
+              },
+              "by": {
+                ".validate": "newData.isString() && newData.val().matches(/^(vini|will|dani|bia|tati)$/)"
+              },
+              "t": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "poca": {
+          "$room": {
+            "$slot": {
+              ".write": "$room.matches(/^[a-z]{1,16}$/) && $slot.matches(/^[0-5]$/) && newData.exists() && newData.parent().parent().parent().child('rate').child(newData.child('by').val()).child('at').val() === now",
+              ".validate": "newData.hasChildren(['x', 'y', 'by', 'seco', 't'])",
+              "x": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+              },
+              "y": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+              },
+              "by": {
+                ".validate": "newData.isString() && newData.val().matches(/^(vini|will|dani|bia|tati)$/)"
+              },
+              "seco": {
+                ".validate": "newData.isBoolean()"
+              },
+              "t": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "molho": {
+          "$room": {
+            "$player": {
+              "$slot": {
+                ".write": "$room.matches(/^[a-z]{1,16}$/) && $player.matches(/^(vini|will|dani|bia|tati)$/) && $slot.matches(/^[0-4]$/) && newData.exists() && newData.parent().parent().parent().parent().child('rate').child($player).child('at').val() === now",
+                ".validate": "newData.hasChildren(['s', 'u', 'v', 't'])",
+                "s": {
+                  ".validate": "newData.isString() && newData.val().matches(/^[LR]$/)"
+                },
+                "u": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 400"
+                },
+                "v": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 80"
+                },
+                "t": {
+                  ".validate": "newData.val() === now"
+                },
+                "$other": {
+                  ".validate": false
+                }
+              }
+            }
+          }
+        },
+        "ana": {
+          "$player": {
+            "$i": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && $i.matches(/^[0-4]$/) && newData.exists() && ((data.exists() && data.child('t').val() >= (now - ((now - 32400000) % 86400000)) && data.child('ok').val() === false && newData.child('r').val() >= data.child('r').val()) || !data.exists() || data.child('t').val() < (now - ((now - 32400000) % 86400000)))",
+              ".validate": "newData.hasChildren(['r', 'ok', 't'])",
+              "r": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 9 && newData.val() % 1 === 0"
+              },
+              "ok": {
+                ".validate": "newData.isBoolean()"
+              },
+              "t": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "quiz": {
+          "$player": {
+            "$i": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && $i.matches(/^[0-9]$/) && newData.exists() && (((!data.exists() || data.child('o').val() < (now - ((now - 32400000) % 86400000))) && newData.child('o').val() === now && newData.child('k').val() === -1 && newData.child('a').val() === 0) || (data.exists() && data.child('o').val() >= (now - ((now - 32400000) % 86400000)) && data.child('k').val() === -1 && newData.child('o').val() === data.child('o').val() && newData.child('k').val() >= 0 && newData.child('a').val() === now))",
+              ".validate": "newData.hasChildren(['o', 'k', 'a'])",
+              "o": {
+                ".validate": "newData.isNumber()"
+              },
+              "k": {
+                ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 3 && newData.val() % 1 === 0"
+              },
+              "a": {
+                ".validate": "newData.isNumber()"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "vivo": {
+          "$player": {
+            ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || newData.child('at').val() - data.child('at').val() >= 100)",
+            ".validate": "newData.hasChildren(['x', 'y', 'fx', 'fy', 'mx', 'my', 'e', 'vi', 'lk', 'at', 'on', 'sv'])",
+            "x": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+            },
+            "y": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 63"
+            },
+            "fx": {
+              ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 1"
+            },
+            "fy": {
+              ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 1"
+            },
+            "mx": {
+              ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 1"
+            },
+            "my": {
+              ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 1"
+            },
+            "e": {
+              ".validate": "newData.isString() && newData.val().matches(/^[nksv]$/)"
+            },
+            "vi": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
+            },
+            "lk": {
+              ".validate": "newData.isString() && newData.val().matches(/^[0-9a-z-]{8,16}$/)"
+            },
+            "a": {
+              ".validate": "newData.val() === 1"
+            },
+            "w": {
+              ".validate": "newData.isString() && newData.val().matches(/^(garrafa|caco|banqueta|taco|cadeira|cano|desentupidor|cadeirao|vaso|engradado|lixeira|faca|socoingles|machadinha|serra|frigideira|bastao|violao|extintor|guardasol|tijolo|espeto|placa|rodo|katana|marreta|rajada|tampinhas|arroto|furacao|chope|pagode|raio|torresmo|garcom|pinga|ima|pano|prego|fita|raquete|molotov|tacoprego|espuma|sococaco)$/)"
+            },
+            "r": {
+              ".validate": "newData.isNumber() && newData.val() >= now - 10000 && newData.val() <= now + 5000"
+            },
+            "q": {
+              ".validate": "newData.isString() && newData.val().matches(/^(rajada|tampinhas|arroto|furacao|chope|pagode|raio|torresmo|garcom|pinga|ima)$/)"
+            },
+            "por": {
+              ".validate": "newData.isString() && newData.val().matches(/^(vini|will|dani|bia|tati)$/) && newData.val() !== $player"
+            },
+            "at": {
+              ".validate": "newData.isNumber() && newData.val() >= now - 5000 && newData.val() <= now + 5000"
+            },
+            "on": {
+              ".validate": "newData.isBoolean()"
+            },
+            "sv": {
+              ".validate": "newData.val() === now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "vgolpe": {
+          "$player": {
+            "$slot": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('t').val() >= 1000)",
+              ".validate": "$slot.matches(/^[0-9]$/) && newData.hasChildren(['to', 'd', 'kx', 'ky', 'w', 'f', 't'])",
+              "to": {
+                ".validate": "newData.isString() && newData.val().matches(/^[a-z0-9]{2,16}$/) && newData.val() !== $player"
+              },
+              "d": {
+                ".validate": "newData.isNumber() && newData.val() >= 1 && (newData.val() <= 40 || (newData.val() <= 100 && newData.parent().child('w').val().matches(/^(rajada|tampinhas|arroto|furacao|chope|pagode|raio|torresmo|garcom|pinga|ima)$/)))"
+              },
+              "kx": {
+                ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 1"
+              },
+              "ky": {
+                ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 1"
+              },
+              "w": {
+                ".validate": "newData.isString() && newData.val().matches(/^(soco|empurrao|garrafa|caco|banqueta|taco|cadeira|cano|desentupidor|cadeirao|vaso|engradado|lixeira|faca|socoingles|machadinha|serra|frigideira|bastao|violao|extintor|guardasol|tijolo|espeto|placa|rodo|katana|marreta|rajada|tampinhas|arroto|furacao|chope|pagode|raio|torresmo|garcom|pinga|ima|pano|prego|fita|raquete|molotov|tacoprego|espuma|sococaco)$/)"
+              },
+              "f": {
+                ".validate": "newData.isBoolean()"
+              },
+              "t": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        },
+        "npc": {
+          "$player": {
+            ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || now - data.child('at').val() >= 150)",
+            ".validate": "newData.hasChildren(['at', 'l'])",
+            "at": {
+              ".validate": "newData.val() === now"
+            },
+            "l": {
+              ".validate": "newData.isString() && newData.val().length <= 1500"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "loja": {
+          "$player": {
+            ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || (now - data.child('t').val() >= 500 && newData.child('g').val() >= data.child('g').val() && newData.child('a').val() >= data.child('a').val()))",
+            ".validate": "newData.hasChildren(['g', 'a', 't'])",
+            "g": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000000 && newData.val() % 1 === 0"
+            },
+            "a": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000000 && newData.val() % 1 === 0"
+            },
+            "t": {
+              ".validate": "newData.val() === now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "mesa": {
+          "$mesa": {
+            ".write": "$mesa.matches(/^[01]$/) && newData.exists() && (!data.exists() || newData.child('n').val() === data.child('n').val() + 1 || newData.child('n').val() === 0 || now - data.child('at').val() > 600000)",
+            ".validate": "newData.hasChildren(['a', 'b', 'v', 'e', 'n', 'tq', 'at'])",
+            "a": {
+              ".validate": "newData.isString() && (newData.val() === '' || newData.val().matches(/^(vini|will|dani|bia|tati|bot[123])$/))"
+            },
+            "b": {
+              ".validate": "newData.isString() && (newData.val() === '' || newData.val().matches(/^(vini|will|dani|bia|tati|bot[123])$/))"
+            },
+            "v": {
+              ".validate": "newData.isNumber() && (newData.val() === 0 || newData.val() === 1)"
+            },
+            "e": {
+              ".validate": "newData.isString() && newData.val().length <= 300"
+            },
+            "n": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000 && newData.val() % 1 === 0"
+            },
+            "tq": {
+              ".validate": "newData.isString() && newData.val().length <= 60"
+            },
+            "at": {
+              ".validate": "newData.val() === now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "ficha": {
+          "$player": {
+            ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || (now - data.child('t').val() >= 2000 && newData.child('k').val() >= data.child('k').val() && newData.child('k').val() <= data.child('k').val() + 10)) && (data.exists() || newData.child('k').val() <= 10)",
+            ".validate": "newData.hasChildren(['k', 't'])",
+            "k": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000000 && newData.val() % 1 === 0"
+            },
+            "t": {
+              ".validate": "newData.val() === now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "juke": {
+          ".write": "newData.exists() && (!data.exists() || now - data.child('t').val() >= 3000)",
+          ".validate": "newData.hasChildren(['s', 'p', 't'])",
+          "s": {
+            ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 31 && newData.val() % 1 === 0"
+          },
+          "p": {
+            ".validate": "newData.isString() && newData.val().matches(/^(vini|will|dani|bia|tati)$/)"
+          },
+          "t": {
+            ".validate": "newData.val() === now"
+          },
+          "$other": {
+            ".validate": false
+          }
+        },
+        "config": {
+          "eventos": {
+            ".write": "newData.exists() && newData.child('p').val() === 'will'",
+            ".validate": "newData.hasChildren(['mult', 'p', 't'])",
+            "mult": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 3"
+            },
+            "p": {
+              ".validate": "newData.isString()"
+            },
+            "t": {
+              ".validate": "newData.val() === now"
+            },
+            "forcar": {
+              "$epoca": {
+                ".validate": "$epoca.matches(/^[0-9]{1,9}$/) && newData.isString() && newData.val().matches(/^(ratazana|apagao|alien|dragao|dino)$/)"
+              }
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "evento": {
+          "$e": {
+            ".write": "$e.matches(/^[0-9]{1,9}$/) && !newData.exists() && (!data.child('abertura').exists() || now - data.child('abertura').child('at').val() > 3600000)",
+            "abertura": {
+              ".write": "$e.matches(/^[0-9]{1,9}$/) && !data.exists() && newData.exists()",
+              ".validate": "newData.hasChildren(['n', 'at'])",
+              "n": {
+                ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 5 && newData.val() % 1 === 0"
+              },
+              "at": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            },
+            "fim": {
+              ".write": "$e.matches(/^[0-9]{1,9}$/) && !data.exists() && newData.exists() && data.parent().child('abertura').exists()",
+              ".validate": "newData.hasChildren(['como', 'p', 'at'])",
+              "como": {
+                ".validate": "newData.isString() && newData.val().matches(/^(morto|religado)$/)"
+              },
+              "p": {
+                ".validate": "newData.isString() && newData.val().matches(/^(vini|will|dani|bia|tati)$/)"
+              },
+              "at": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            },
+            "dano": {
+              "$ent": {
+                "$player": {
+                  ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && $ent.matches(/^(rato|alien|grande|disco[0-5]|dragao|dino)$/) && newData.exists() && data.parent().parent().parent().child('abertura').exists() && (!data.exists() || newData.val() >= data.val())",
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000 && newData.val() % 1 === 0"
+                }
+              }
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "trofeus": {
+          "$trofeu": {
+            "$player": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && $trofeu.matches(/^(rabo|vela|gorjeta|antena|sumiuze|dente|ovo)$/) && !data.exists() && newData.exists()",
+              ".validate": "newData.val() === now"
+            }
+          }
+        },
+        "inventario": {
+          "$player": {
+            "$item": {
+              ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && $item.matches(/^(mc-camisa-verde|mc-calca-caqui|mc-cabelo-melado|mc-camisa-inseticida|mc-cabelo-asa|mc-camisa-rainha|mc-calca-enxame|mc-cabelo-coroa|qm-camisa-chita|qm-calca-remendo|qm-cabelo-milho|qm-camisa-bandeirinha|qm-calca-quadrilha|qm-cabelo-fogueira|mc-chapeu-bone|qm-chapeu-palha|qm-chapeu-cartola|ch-camisa-avental|ch-calca-carvao|ch-cabelo-fumaca|ch-camisa-samambaia|ch-calca-lava|ch-cabelo-brasa)$/) && !data.exists() && newData.exists()",
+              ".validate": "newData.val() === now"
+            }
+          }
+        },
+        "po": {
+          "$player": {
+            ".write": "$player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || (now - data.child('t').val() >= 500 && newData.child('g').val() >= data.child('g').val() && newData.child('s').val() >= data.child('s').val()))",
+            ".validate": "newData.hasChildren(['g', 's', 't']) && newData.child('s').val() <= newData.child('g').val()",
+            "g": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000000 && newData.val() % 1 === 0"
+            },
+            "s": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000000 && newData.val() % 1 === 0"
+            },
+            "t": {
+              ".validate": "newData.val() === now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "portais": {
+          "$portal": {
+            "$player": {
+              ".write": "$portal.matches(/^(moscas|quermesse|churrasco)$/) && $player.matches(/^(vini|will|dani|bia|tati)$/) && newData.exists() && (!data.exists() || data.child('t').val() < (now - ((now - 32400000) % 86400000)) || (now - data.child('t').val() >= 2000 && newData.child('s').val() >= data.child('s').val()))",
+              ".validate": "newData.hasChildren(['s', 'f', 'v', 't'])",
+              "s": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000 && newData.val() % 1 === 0"
+              },
+              "f": {
+                ".validate": "newData.isString() && newData.val().length <= 2400 && newData.val().length % 4 === 0 && newData.val().matches(/^[0-9a-z]*$/)"
+              },
+              "v": {
+                ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 99 && newData.val() % 1 === 0"
+              },
+              "t": {
+                ".validate": "newData.val() === now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

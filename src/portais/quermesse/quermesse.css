@@ -1,0 +1,96 @@
+/* Quermesse Maluca (Fatia 14): a tela ocupa tudo como o GFA; o canvas de 400 × 240 estica sem suavizar. */
+.qm-tela {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  background: #1b2848;
+}
+.qm-intro {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(27, 40, 72, 0.86);
+}
+.qm-intro p {
+  max-width: 34rem;
+  margin: 0;
+}
+.qm-logo {
+  font-size: 2.3rem;
+  letter-spacing: 0.1em;
+  color: #fee761;
+  text-shadow: 3px 3px 0 #b8343c;
+}
+.qm-nota {
+  font-size: 0.9rem;
+  color: #c0cbdc;
+}
+.qm-hud {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 6px 12px;
+  background: rgba(24, 20, 37, 0.8);
+  border: 2px solid #b8343c;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+.qm-apagada {
+  opacity: 0.25;
+  filter: grayscale(1);
+}
+/* Barra do placar de hoje: os amigos parados onde chegaram; o seu progresso enche por baixo. */
+.qm-amigos {
+  position: absolute;
+  top: calc(max(10px, env(safe-area-inset-top)) + 44px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(70vw, 420px);
+  height: 8px;
+  background: #262b44;
+  border: 1px solid #5a6988;
+}
+.qm-amigos i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: #feae34;
+}
+.qm-amigos span {
+  position: absolute;
+  top: 10px;
+  transform: translateX(-50%);
+  padding: 0 4px;
+  border-top: 3px solid;
+  font-size: 0.8rem;
+  color: #c0cbdc;
+  white-space: nowrap;
+}
+.qm-amigos span.qm-passou {
+  color: #63c74d;
+}
+.qm-acao {
+  position: absolute;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: calc(40px + env(safe-area-inset-bottom));
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid #fee761;
+  background: rgba(184, 52, 60, 0.6);
+  color: #fee761;
+  font: inherit;
+  font-size: 2.4rem;
+  touch-action: none;
+}

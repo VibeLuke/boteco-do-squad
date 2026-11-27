@@ -1,0 +1,35 @@
+{
+  "name": "boteco-do-squad",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Boteco do Squad: palavras cruzadas, placar e um bar ao vivo em pixel art para uma turma de amigos",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import ./tests/turma-dos-testes.mjs tests/generator.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/scoreboard.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/antirepeticao.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/bar.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/sangue.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/dia.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/bagunca.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/jukebox.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/sinuca.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/regras-firebase.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/vivo.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/rede.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/upgrade.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/bilhar.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia4.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/gfa.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fx.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia5.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia6.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/gfa6.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia7.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia8.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia9.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia10.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia11.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia12.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/moscas.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/quermesse.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia15.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia16.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia17.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia18.test.mjs && node --import ./tests/turma-dos-testes.mjs tests/fatia20.test.mjs && node tests/turma.test.mjs && node scripts/gerar-regras.mjs --conferir && node scripts/validar-pacotes.mjs games-classicos vida-gamer anime-hq fantasia-scifi-rpg",
+    "sprites": "node scripts/folha-sprites.mjs",
+    "mock:firebase": "node tests/mock-firebase.mjs",
+    "mutacao": "node scripts/mutacao.mjs",
+    "regras": "node scripts/gerar-regras.mjs",
+    "fumaca:pw": "node tests/ferramentas/pw-fumaca.mjs",
+    "publicar": "npm test && npm run build && firebase deploy --only hosting"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "0.181.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "firebase-tools": "^15.37.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}

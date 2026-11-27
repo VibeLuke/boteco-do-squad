@@ -1,0 +1,28 @@
+name: Tema de palavras
+description: Um tema novo para as cruzadas, ou palavras e dicas para um tema que já existe.
+labels: [conteúdo]
+body:
+  - type: input
+    id: tema
+    attributes:
+      label: Tema
+      placeholder: "Ex.: Cozinha brasileira"
+    validations:
+      required: true
+  - type: textarea
+    id: palavras
+    attributes:
+      label: Palavras e dicas
+      description: Uma por linha, no formato PALAVRA — dica. Sem acento na palavra; a dica pode ter.
+      placeholder: |
+        FEIJOADA — Prato de feijão-preto com carnes, servido com couve e laranja
+        PAMONHA — Massa de milho verde cozida na palha
+    validations:
+      required: true
+  - type: checkboxes
+    id: licenca
+    attributes:
+      label: Licença
+      options:
+        - label: Escrevi as dicas eu mesmo e aceito publicá-las sob CC BY 4.0.
+          required: true

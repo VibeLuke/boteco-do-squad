@@ -1,0 +1,50 @@
+name: Demo no GitHub Pages
+
+# A demonstração pública do kit: o jogo SEM banco (placar no aparelho, bar só para quem está nele). Ninguém grava em
+# banco nenhum. Só roda no repositório oficial do kit; numa cópia sua, publique a sua turma pelo Firebase Hosting
+# (veja kit/LEIA-ME.md) ou troque o nome abaixo e ligue o Pages (Settings → Pages → GitHub Actions).
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  demo:
+    if: github.repository == 'VibeLuke/boteco-do-squad'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm test
+
+      - name: Build sem banco
+        run: npm run build
+        env:
+          VITE_FIREBASE_DB_URL: ''
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - id: publicar
+        uses: actions/deploy-pages@v4

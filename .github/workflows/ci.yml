@@ -1,0 +1,37 @@
+name: Testes e build
+
+# O site é publicado à mão no Firebase Hosting (npm run publicar, com VITE_FIREBASE_DB_URL no .env.production).
+# Aqui só conferimos que cada push passa nos testes e compila.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+        env:
+          VITE_FIREBASE_DB_URL: ${{ vars.FIREBASE_DB_URL }}

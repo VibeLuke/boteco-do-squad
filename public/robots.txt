@@ -1,0 +1,3 @@
+# Site de turma: não listado. Abre para quem tem o link, mas não aparece em buscador.
+User-agent: *
+Disallow: /

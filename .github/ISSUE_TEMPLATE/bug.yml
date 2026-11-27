@@ -1,0 +1,38 @@
+name: Algo quebrou
+description: Um erro no jogo, no placar, no bar ou na publicação.
+labels: [bug]
+body:
+  - type: textarea
+    id: o-que
+    attributes:
+      label: O que aconteceu
+      description: O que você fez, o que esperava e o que viu.
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como repetir
+      placeholder: |
+        1. Abri o Bar Vivo como ...
+        2. Toquei em ...
+        3. Apareceu ...
+    validations:
+      required: true
+  - type: input
+    id: onde
+    attributes:
+      label: Onde
+      description: "Navegador e aparelho (por exemplo: Chrome no Android, Safari no iPhone, Firefox no PC)."
+  - type: textarea
+    id: console
+    attributes:
+      label: Erro do console (se tiver)
+      render: text
+  - type: checkboxes
+    id: dados
+    attributes:
+      label: Privacidade
+      options:
+        - label: Tirei da issue a URL do meu banco e qualquer nome ou dado de pessoas reais.
+          required: true

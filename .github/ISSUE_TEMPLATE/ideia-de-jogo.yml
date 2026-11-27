@@ -1,0 +1,35 @@
+name: Ideia de minijogo, portal ou evento
+description: Uma barraca nova na Quermesse, um portal, um evento ou bicho no bar.
+labels: [ideia]
+body:
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo
+      options:
+        - Microjogo da Quermesse
+        - Portal novo
+        - Evento do bar
+        - Arma, poder ou móvel
+        - NPC
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: como
+    attributes:
+      label: Como se joga
+      description: Em poucas frases. Qual é o botão, como se ganha, como se perde, quanto tempo dura.
+    validations:
+      required: true
+  - type: textarea
+    id: rede
+    attributes:
+      label: O que vai para o banco
+      description: Pontos, prêmios, dano? Se nada, escreva "nada" (é o mais fácil de aceitar).
+  - type: checkboxes
+    id: receita
+    attributes:
+      label: Antes de enviar
+      options:
+        - label: Li a receita correspondente em docs/COMO_EXPANDIR.md.
